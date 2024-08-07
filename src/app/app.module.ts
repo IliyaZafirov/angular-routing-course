@@ -7,7 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { ComboCardViewComponent } from './combo-card-view/combo-card-view.component';
 import { SideMenuComponent } from './combo-card-view/side-menu/side-menu.component';
 import { DetailViewComponent } from './combo-card-view/detail-view/detail-view.component';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule, Routes } from '@angular/router';
 import { SubHeroLogoComponent } from './shared-ui/sub-hero-logo/sub-hero-logo.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { HeroSectionComponent } from './home/hero-section/hero-section.component';
@@ -18,6 +18,15 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { BreadcrumbsComponent } from './shared-ui/breadcrumbs/breadcrumbs.component';
 import { ContactComponent } from './contact/contact.component';
+import { AppRoutingModule } from './app-routing.module';
+import { ChildRoutingModule } from './child-routing.module';
+
+
+export const ROUTES : Routes = [
+  { path: '', component: HomeComponent},
+  { path: 'home', redirectTo: '', pathMatch: 'full'},
+  { path: '**', component: NotFoundComponent},
+]
 
 @NgModule({
   declarations: [
@@ -32,8 +41,7 @@ import { ContactComponent } from './contact/contact.component';
     SubSectionComponent,
     CardComponent,
     HeaderComponent,
-    BreadcrumbsComponent,
-    ContactComponent,
+    BreadcrumbsComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +49,11 @@ import { ContactComponent } from './contact/contact.component';
     RouterModule,
     MatMenuModule,
     MatButtonModule,
+    RouterModule.forRoot(ROUTES, {
+      enableTracing: true
+    })
+    // AppRoutingModule,
+    // ChildRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
